@@ -2,12 +2,11 @@
 
 import json
 
-
 def main():
     # Load Baby Data from File
     file = open("baby-names-data.json")
     baby_data = json.load(file)
-    file.close()
+    file.close() 
 
     # Main Menu
     loop = True
@@ -44,28 +43,49 @@ def getMenuSelection():
 
 def displayAll(baby_data):
     # Display All Baby Data
-    print("\nDISPLAY ALL")
+    print("\nDISPLAY ALL") 
+    for i in range(len(baby_data)):
+        print(baby_data[i].get("name") + " (Rank: " + str(baby_data[i].get("rank")) + ", Gender: " + baby_data[i].get("gender") + ")")
 
 
 def searchGender(baby_data):
     # Dislay All Baby Names based on Gender
-    print("\nSEARCH BY GENDER")
+    print("\nSEARCH BY GENDER") 
+    babyGender = input("Enter a gender: ")
+    for i in range(len(baby_data)):
+        if baby_data[i].get("gender") == babyGender:
+            print(baby_data[i].get("name") + " (Rank: " + str(baby_data[i].get("rank")) + ", Gender: " + baby_data[i].get("gender") + ")")
 
 
 def searchRank(baby_data):
     # Display All Baby Names based on Rank
-    print("\nSEARCH BY RANK")
+    minRank = input("Enter a minimum rank: ")
+    maxRank = input("Enter a maximum rank: ") 
+    for i in range(len(baby_data)):
+        if baby_data[i].get("rank") >= int(minRank) and baby_data[i].get("rank") <= int(maxRank):
+            print(baby_data[i].get("name") + " (Rank: " + str(baby_data[i].get("rank")) + ", Gender: " + baby_data[i].get("gender") + ")")
 
 
 def searchStartLetter(baby_data):
     # Insert User Item into a Position
-    print("\nSEARCH BY START LETTER")
+    print("\nSEARCH BY START LETTER") 
+    firstLetter = input("Enter first letter: ") 
+    for i in range(len(baby_data)): 
+        baby_name = baby_data[i].get("name")
+        if baby_name[0] == firstLetter: 
+            print(baby_data[i].get("name") + " (Rank: " + str(baby_data[i].get("rank")) + ", Gender: " + baby_data[i].get("gender") + ")")
 
 
 def searchNameLength(baby_data):
     # Remove item from position
     print("\nSEARCH BY NAME LENGTH")
-
+    nameLength = input("Enter name length: ") 
+    babycount = 0
+    for i in range(len(baby_data)): 
+        baby_name = baby_data[i].get("name")
+        if len(baby_name)== int(nameLength): 
+            print(baby_data[i].get("name") + " (Rank: " + str(baby_data[i].get("rank")) + ", Gender: " + baby_data[i].get("gender") + ")") 
+            babycount += 1
 
 # Invoke main to begin program
 main()
